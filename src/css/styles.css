@@ -21,8 +21,11 @@ body {
 }
 
 .btn {
-    /* margin-left: auto; */
+    /* width: ; */
     margin-right: auto;
     border: none;
     cursor: pointer;
+    border-color: aqua;
+    background-image: url(/src/image/search_find_lupa_21889.ico) ;
+    
 }
