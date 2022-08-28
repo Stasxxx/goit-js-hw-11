@@ -11,21 +11,25 @@ body {
 }
 
 .input {
-    height: ;
+   
     border: none;
-    border-radius: 0;
-    box-sizing: border-box;
+    outline: none;
     margin-left: auto;
-    /* margin-right: auto; */
+    padding: 5px 10px;
+    
 
 }
 
 .btn {
     /* width: ; */
     margin-right: auto;
+    padding: 5px 15px;
     border: none;
     cursor: pointer;
     border-color: aqua;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
     background-image: url(/src/image/search_find_lupa_21889.ico);
 }
 
@@ -61,6 +65,7 @@ body {
     object-fit: cover;
 }
 
+
 .info {
     display: flex;
     align-items: center;
@@ -73,6 +78,11 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 2px;
+    background-color: rgb(53, 135, 223);
 }
 
 button.is-hidden {
