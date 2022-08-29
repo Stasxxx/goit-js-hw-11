@@ -7,25 +7,24 @@ export default class FetchPictures{
         this.currentPage = 1;
     }
     
-    fetchGallery() {
+    async fetchGallery() {
         
-       return axios
-            .get(`/?key=${API_KEY}&q=${this.searchImg}&image_type=photo&page=${this.currentPage}&per_page=40&orientation=horizontal&safesearch=true`)
-            .then(({data}) => {
-                this.incrementPage()
+       const respons = await axios.get(`/?key=${API_KEY}&q=${this.searchImg}&image_type=photo&page=${this.currentPage}&per_page=40&orientation=horizontal&safesearch=true`)
+            // .then(({data}) => {
+               await this.incrementPage()
                 // console.log(images.data)
-                return data;
-            })  
-        .catch ((error) => {
-            console.log(error)
-        })
+                return respons.data;
+            // })  
+        // .catch ((error) => {
+        //     console.log(error)
+        // })
     }
 
-    incrementPage() {
+    async incrementPage() {
     this.currentPage += 1;
     }
     
-     resetPage() {
+    async resetPage() {
     this.currentPage = 1;
     }
     

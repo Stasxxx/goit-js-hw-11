@@ -24,45 +24,44 @@ let gallery = new SimpleLightbox('.gallery a', {
 });
 
 
-function onFormSubmit(e) {
+async function onFormSubmit(e) {
   e.preventDefault()
   isLoading = true
 if (fetchPictures.img === e.target.searchQuery.value) return;
   
   fetchPictures.img = e.target.searchQuery.value
-  
-  
-  fetchPictures.resetPage()
-  
-  fetchPictures.fetchGallery()
-    .then(data => {
-      if (data.total === 0) {
+    
+  await fetchPictures.resetPage()
+  const images = await fetchPictures.fetchGallery()
+  // await fetchPictures.fetchGallery()
+    // .then(data => {
+      if (images.total === 0) {
       return Notify.failure("Sorry, there are no images matching your search query. Please try again.")
       };
       loadMore.classList.remove('is-hidden')
       clearImgContainer()
-      marcupImg(data)
+      marcupImg(images)
 
       if (isLoading) {
-        Notify.success(`Hooray! We found ${data.totalHits} images.`);
+        Notify.success(`Hooray! We found ${images.totalHits} images.`);
         isLoading = false;
       }
-    })
-  
-  
+    // })
 }
 
-function handleLoadMoreClick(e) {
+async function handleLoadMoreClick(e) {
   
-  fetchPictures.fetchGallery()
-    .then(data => {
-      console.log(data)
-      if (data.hits.length === 0) {
+  // await fetchPictures.fetchGallery()
+  const images = await fetchPictures.fetchGallery()
+     
+    // .then(data => {
+      // console.log(data)
+      if (images.hits.length === 0) {
         loadMore.classList.add('is-hidden')
         Notify.info("We're sorry, but you've reached the end of search results.")
       };
-      marcupImg(data);
-    })
+      marcupImg(images);
+    // })
 }
 
 function marcupImg(data) {
