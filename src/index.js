@@ -10,6 +10,9 @@ const searchInput = document.querySelector('#search-form')
 const listGallery = document.querySelector('.gallery')
 const loadMore = document.querySelector('.load-more')
 
+
+
+
 let isLoading = true;
 const fetchPictures = new FetchPictures()
 
@@ -27,7 +30,7 @@ let gallery = new SimpleLightbox('.gallery a', {
 async function onFormSubmit(e) {
   e.preventDefault()
   isLoading = true
-if (fetchPictures.img === e.target.searchQuery.value) return;
+  if (fetchPictures.img === e.target.searchQuery.value) return;
   
   fetchPictures.img = e.target.searchQuery.value
     
@@ -35,7 +38,9 @@ if (fetchPictures.img === e.target.searchQuery.value) return;
   const images = await fetchPictures.fetchGallery()
   // await fetchPictures.fetchGallery()
     // .then(data => {
-      if (images.total === 0) {
+  if (images.total === 0) {
+        clearImgContainer()
+    loadMore.classList.add('is-hidden')
       return Notify.failure("Sorry, there are no images matching your search query. Please try again.")
       };
       loadMore.classList.remove('is-hidden')
@@ -72,5 +77,3 @@ function marcupImg(data) {
 function clearImgContainer() {
   listGallery.innerHTML = '';
 }
-
-
