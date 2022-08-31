@@ -72,21 +72,26 @@ async function handleLoadMoreClick(e) {
       };
       marcupImg(images);
     // })
-//   const { height: clientHeight } = document
-//   .querySelector(".gallery")
-//   .firstElementChild.getBoundingClientRect();
-
-// window.scrollBy({
-//   top: clientHeight * 2,
-//   behavior: "smooth",
-// });
+  
 }
 
 function marcupImg(data) {
   listGallery.innerHTML = renderGallery(data);
   gallery.refresh()
+  galleryScroll()
 }
 
 function clearImgContainer() {
   listGallery.innerHTML = '';
+}
+
+function galleryScroll() {
+  const { height: cardHeight } = document
+  .querySelector(".gallery")
+  .firstElementChild.getBoundingClientRect();
+
+  window.scrollTo({
+  top: cardHeight * 2,
+  behavior: "smooth",
+});
 }
