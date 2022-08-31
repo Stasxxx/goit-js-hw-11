@@ -97,5 +97,13 @@ function galleryScroll() {
 });
 }
 
-const documentRect = document.documentElement.getBoundingClientRect()
-console.log(documentRect)
+
+window.addEventListener('scroll', () => {
+const documentScroll = document.documentElement.getBoundingClientRect()
+  console.log(Math.ceil(documentScroll.bottom))
+  console.log(document.documentElement.clientHeight)
+  if (Math.ceil(documentScroll.bottom)=== document.documentElement.clientHeight) {
+  handleLoadMoreClick()
+  }
+}
+)
