@@ -30,12 +30,14 @@ let gallery = new SimpleLightbox('.gallery a', {
 async function onFormSubmit(e) {
   e.preventDefault()
   isLoading = true
-  fetchPictures.img = e.target.searchQuery.value.trim();
+  
 
-  if (fetchPictures.img === e.target.searchQuery.value || fetchPictures.img === '') return;
+  if (fetchPictures.img === e.target.searchQuery.value) return;
   
+  fetchPictures.img = e.target.searchQuery.value.trim();
   
-    
+  if (fetchPictures.img === '') return;
+
   await fetchPictures.resetPage()
   const images = await fetchPictures.fetchGallery()
   // await fetchPictures.fetchGallery()
@@ -70,7 +72,14 @@ async function handleLoadMoreClick(e) {
       };
       marcupImg(images);
     // })
-  
+//   const { height: clientHeight } = document
+//   .querySelector(".gallery")
+//   .firstElementChild.getBoundingClientRect();
+
+// window.scrollBy({
+//   top: clientHeight * 2,
+//   behavior: "smooth",
+// });
 }
 
 function marcupImg(data) {
