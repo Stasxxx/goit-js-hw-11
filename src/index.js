@@ -30,9 +30,11 @@ let gallery = new SimpleLightbox('.gallery a', {
 async function onFormSubmit(e) {
   e.preventDefault()
   isLoading = true
-  if (fetchPictures.img === e.target.searchQuery.value) return;
+  fetchPictures.img = e.target.searchQuery.value.trim();
+
+  if (fetchPictures.img === e.target.searchQuery.value || fetchPictures.img === '') return;
   
-  fetchPictures.img = e.target.searchQuery.value
+  
     
   await fetchPictures.resetPage()
   const images = await fetchPictures.fetchGallery()
@@ -40,7 +42,7 @@ async function onFormSubmit(e) {
     // .then(data => {
   if (images.total === 0) {
         clearImgContainer()
-    loadMore.classList.add('is-hidden')
+      loadMore.classList.add('is-hidden')
       return Notify.failure("Sorry, there are no images matching your search query. Please try again.")
       };
       loadMore.classList.remove('is-hidden')
@@ -52,6 +54,7 @@ async function onFormSubmit(e) {
         isLoading = false;
       }
     // })
+  
 }
 
 async function handleLoadMoreClick(e) {
@@ -61,12 +64,13 @@ async function handleLoadMoreClick(e) {
      
     // .then(data => {
       // console.log(data)
-      if (images.hits.length === 0) {
+      if (images.hits.length < 40) {
         loadMore.classList.add('is-hidden')
         Notify.info("We're sorry, but you've reached the end of search results.")
       };
       marcupImg(images);
     // })
+  
 }
 
 function marcupImg(data) {
