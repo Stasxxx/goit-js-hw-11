@@ -56,7 +56,7 @@ async function onFormSubmit(e) {
         isLoading = false;
       }
     // })
-  
+  galleryScroll()
 }
 
 async function handleLoadMoreClick(e) {
@@ -76,7 +76,8 @@ async function handleLoadMoreClick(e) {
 }
 
 function marcupImg(data) {
-  listGallery.innerHTML = renderGallery(data);
+listGallery.insertAdjacentHTML('beforeend', renderGallery(data))
+  // listGallery.innerHTML = renderGallery(data);
   gallery.refresh()
   galleryScroll()
 }
@@ -90,8 +91,11 @@ function galleryScroll() {
   .querySelector(".gallery")
   .firstElementChild.getBoundingClientRect();
 
-  window.scrollTo({
+  window.scrollBy({
   top: cardHeight * 2,
   behavior: "smooth",
 });
 }
+
+const documentRect = document.documentElement.getBoundingClientRect()
+console.log(documentRect)
